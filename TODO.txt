@@ -1,0 +1,19 @@
+TODO:
+
+refactor card case statement to include numbers in one condition ✅
+limit character lenght of names input ✅
+consider adding more decks per players
+If the dealer has any high aces (counted as 11) as part of his total, he must hit while his count is below 18.
+If any player has a value greater than their current value, the dealer must continue to hit. E.g. if a player has 20, the dealer must hit until they have 20 or greater.
+If the player and dealer end up with the same value, the player loses the hand. so if both have 21 dealer wins
+if multiple players beat the dealer, all players that beat dealer gets 1 point
+wins can if no player gets to 20, highest score wins
+A player or dealer win with two cards that total 21 is worth 2 points
+A player and dealer each with two cards that total 21 are both awarded 1 point
+otherwise 1 point
+build play into class and fuctions, call initial function outside
+if player hits above 21, bust and remove them
+retain all players in case of playing a new game
+at end of game option to play new game with current players, play new game with new players, or quit
+reatain total wins of players when playing new games with current players
+option to play to a target win total, like who gets 10 wins first, or best of option
