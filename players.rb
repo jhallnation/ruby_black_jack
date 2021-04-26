@@ -1,9 +1,9 @@
 require './contestants.rb'
 
 class Players < Contestants
-
-  def initialize(name)
-    super(name)
+  def initialize(name, id)
+    super(name, id)
+    #probably removed this
     @all_players = []
   end
 
@@ -11,10 +11,12 @@ class Players < Contestants
     @hand
   end
 
+  #probably removed this
   def add_players(player)
     @all_players.append(player)
   end
 
+  #probably removed this
   def all_players
     @all_players
   end

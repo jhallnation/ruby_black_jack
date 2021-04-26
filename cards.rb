@@ -1,9 +1,10 @@
 class Cards
+  attr_accessor :deck
   def initialize
     @deck = []
   end
 
-  def add_deck(dealer,num_of_decks)
+  def add_deck(num_of_decks)
     card_id = 0
 
     num_of_decks.times do 
@@ -15,15 +16,11 @@ class Cards
 
       card_suit.each do |suit|
         card_values.each do |value|
-          @deck.push({id: card_id,card_suit: suit, card_value: value, location: dealer})
+          @deck.push({id: card_id,card_suit: suit, card_value: value, location: 0}) #user id, where card is, 0 is for DEALER
           card_id += 1
         end
       end
     end
-  end
-
-  def deck
-    @deck
   end
 
   def suffle_cards

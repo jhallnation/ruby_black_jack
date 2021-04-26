@@ -1,20 +1,29 @@
 class GamePlayActions
-  def get_players
-    begin
-      puts "How many players? Please enter a number between 1-10 or 0 to exit!"
-      number_of_players = gets.chomp
-      number_of_players = Integer(number_of_players)
-    rescue ArgumentError
-      retry
+
+  def get_players(number_of_players)
+    players = []
+    player_names = []
+
+    player_counter = 1
+    while number_of_players + 1 > player_counter do 
+      puts "Provide name for player #{player_counter}!"
+       #stip edge whitespaces and adds underscore for spaces in between words, capitalizes all letters
+      player_name = gets.chomp.strip.gsub(/\s+/, "_").upcase
+
+      # limit character length
+      if player_name.length > 15
+        puts '15 character limit!'
+      # make sure names are unique
+      elsif player_names.include?(player_name)
+        puts 'Name already taken!'
+      else
+        players.append(Players.new(player_name, player_counter))
+        player_names.append(player_name)
+        player_counter += 1
+      end
     end
 
-    if number_of_players > 10 || number_of_players < 0
-      get_players
-    elsif number_of_players == 0
-      abort("Have a great day!") 
-    else   
-      return get_players_names(number_of_players)
-    end
+    return players
   end
 
   def initiate_hand(deck,players)
@@ -85,25 +94,6 @@ class GamePlayActions
   end
 
   private 
-
-  def get_players_names(number_of_players)
-    players_names = []
-    loop_counter = 1
-    while number_of_players + 1 > loop_counter do 
-      puts "Provide name for player #{loop_counter}"
-       #stip edge whitespaces and adds underscore for spaces in between words
-       #should I capitalize every first letter?
-      player_name = gets.chomp.strip.gsub(/\s+/, "_")
-      # limit character length
-      if player_name.length > 15
-        puts '15 character limit'
-      else
-        players_names.append(player_name)
-        loop_counter += 1
-      end
-    end
-    return players_names
-  end
 
   def get_card_value(card_value, player_hand_total)
 

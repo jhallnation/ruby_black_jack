@@ -1,8 +1,8 @@
 require './contestants.rb'
 
 class Dealer < Contestants
-  def initialize(name)
-    super(name)
+  def initialize(name, id)
+    super(name, id)
     @display_hand = []
   end
 

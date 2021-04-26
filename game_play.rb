@@ -4,64 +4,61 @@ require './players.rb'
 require './game_play_actions/game_play_actions.rb'
 
 #creates instance of GamePlayActions to have access to game methods
-#was wanting to do GamePlayActions as module, but was not getting get_card_value as private method in module working
-
 game = GamePlayActions.new
-
-#creates players
 
 all_contestants = [] # players + dealer
 players = []
+number_of_players = 0
 
-@dealer = Dealer.new('dealer')
+# players_names = game.get_players
+until number_of_players > 0 && number_of_players <= 11
+  begin
+    puts "How many players? Please enter a number between 1-10 or 0 to exit!"
+    number_of_players = Integer(gets.chomp) + 1 # to include dealer
 
-all_contestants.append(@dealer)
+    if number_of_players == 1
+      abort("Have a great day!")
+    end
 
-players_names = game.get_players
-
-number_of_players = players_names.length + 1 # 1 for dealer
-
-players_names.each do |player_name|
-  instance_variable_set("@#{player_name}", Players.new(player_name))
-  players.append(instance_variable_get("@#{player_name}"))
+  rescue ArgumentError
+    retry
+  end
 end
 
+#getting and creating players
+players = game.get_players(number_of_players - 1)
+dealer = Dealer.new('DEALER', 0)
+
+all_contestants.append(dealer)
 all_contestants.concat(players)
 
 # creates deck and suffles
 current_deck = Cards.new
 
 if number_of_players.between?(1,2)
-  current_deck.add_deck(@dealer.name,1)
+  current_deck.add_deck(1)
 elsif number_of_players.between?(3,5)
-  current_deck.add_deck(@dealer.name,2)
+  current_deck.add_deck(2)
 elsif number_of_players.between?(6,8)
-  current_deck.add_deck(@dealer.name,3)
+  current_deck.add_deck(3)
 else
-  current_deck.add_deck(@dealer.name,4)
+  current_deck.add_deck(4)
 end
-
-
-puts '####################'
-puts 'deck initial before suffle'
-puts current_deck.deck
-puts '####################'
-
 
 current_deck.suffle_cards
 
 puts '####################'
-puts 'deck initial length'
-puts current_deck.deck.length
+counter = 0
+current_deck.deck.each do |card|
+  if card[:location] == 0
+    counter += 1
+  end
+end
+puts "cards in dealer's hand"
+puts counter
 puts '####################'
 
-
-puts '####################'
-puts 'deck initial after suffle'
-puts current_deck.deck
-puts '####################'
-
-abort('deck test')
+abort('current refactor location')
 
 # #initiat hands for players and updates deck
 ###################################################

@@ -1,7 +1,9 @@
 class Contestants
   attr_reader :name
+  attr_reader :id
 
-  def initialize(name)
+  def initialize(name, id)
+    @id = id
     @name = name
     @hand = []
     @player_hand_total = 0
@@ -12,8 +14,8 @@ class Contestants
     @hand
   end
 
-  def update_hand(hand)
-    @hand = hand
+  def update_hand(new_card_ids)
+    @hand += hand
   end
 
   def player_hand_total
